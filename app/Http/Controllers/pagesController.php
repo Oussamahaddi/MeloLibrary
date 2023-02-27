@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ArtistController extends Controller
+class pagesController extends Controller
 {
-    // load home page
+    // load all pages
     public function index() {
         return view('Pages.index', []);
     }

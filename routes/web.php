@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\pagesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ArtistController::class, 'index']);
+// home page that load recent play
+Route::get('/', [pagesController::class, 'index']);
+
+// register form
+Route::get('/register', [ClientController::class, 'create']);
+
+// store client data
+Route::post('/store', [ClientController::class, 'store']);
+
+// login form
+// Route::get('/login', [ClientController::class, 'login']);
+
