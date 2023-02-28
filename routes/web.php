@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\pagesController;
 use App\Http\Controllers\UsersController;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,5 +27,9 @@ Route::get('/register', [ClientController::class, 'create']);
 Route::post('/store', [ClientController::class, 'store']);
 
 // login form
-// Route::get('/login', [ClientController::class, 'login']);
+Route::get('/login', [ClientController::class, 'login']);
+// ->middleware('auth')
+
+// log in user
+Route::post('/users/authentification' , [ClientController::class , 'authentification']);
 

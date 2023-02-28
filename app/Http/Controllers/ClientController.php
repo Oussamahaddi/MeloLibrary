@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -12,21 +13,48 @@ class ClientController extends Controller
         return view('users.register');
     }
 
-    // show login form
-    // public function login() {
-    //     return view('users.login');
-    // }
-
     // store register data
     public function store(Request $request) {
         // dd($request->all());
         $formField = $request->validate([
-            'fullname' => 'required',
-            'email' => ['required', 'email'],
-            'password' => ['required', Rule::unique('client', 'password')],
-            'date' => 'required'
+            'name' => ['required', 'min:4'],
+            'email' => ['required', 'email' , Rule::unique('clients', 'email')],
+            'password' => ['required', 'min:6'],
+            'age' => 'required',
         ]);
 
-        return redirect('/');
+        // hash password
+        $formField['password'] = bcrypt($formField['password']);
+
+        // create user 
+        $user = Client::create($formField);
+
+        // login
+        auth()->login($user);
+
+        return redirect('/')->with('message', 'Register Succefully and logged in');
     }
+
+
+    // show login form
+    public function login() {
+        return view('users.login');
+    }
+
+    public function authentification(Request $request) {
+        // dd($request->all());
+        $formField = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6']
+        ]);
+        // dd(auth()->attempt($formField));
+
+        if (auth()->attempt($formField)) {
+            $request->session()->regenerate();
+            return redirect('/')->with('message', 'you are now logged in');
+        }
+
+        return back()->withErrors(['email' => 'invalid email'])->onlyInput('email');
+    }
+
 }
