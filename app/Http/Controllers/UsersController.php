@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class ClientController extends Controller
+class UsersController extends Controller
 {
-    // show register form
     public function create() {
         return view('users.register');
     }
@@ -18,23 +17,18 @@ class ClientController extends Controller
         // dd($request->all());
         $formField = $request->validate([
             'name' => ['required', 'min:4'],
-            'email' => ['required', 'email' , Rule::unique('clients', 'email')],
+            'email' => ['required', 'email' , Rule::unique('Users', 'email')],
             'password' => ['required', 'min:6'],
             'age' => 'required',
         ]);
-
         // hash password
         $formField['password'] = bcrypt($formField['password']);
-
         // create user 
-        $user = Client::create($formField);
-
+        $user = User::create($formField);
         // login
         auth()->login($user);
-
         return redirect('/')->with('message', 'Register Succefully and logged in');
     }
-
 
     // show login form
     public function login() {
@@ -47,14 +41,19 @@ class ClientController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'min:6']
         ]);
-        // dd(auth()->attempt($formField));
-
         if (auth()->attempt($formField)) {
             $request->session()->regenerate();
-            return redirect('/')->with('message', 'you are now logged in');
+            return redirect('/')->with('message', 'Welcome back');
         }
-
-        return back()->withErrors(['email' => 'invalid email'])->onlyInput('email');
+        return back()->withErrors(['email' => 'invalid email or password'])->onlyInput('email');
     }
+
+    public function logout(Request $request) {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+
 
 }

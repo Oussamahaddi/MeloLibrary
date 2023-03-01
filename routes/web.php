@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\pagesController;
+use App\Http\Controllers\PlaylistsController;
 use App\Http\Controllers\UsersController;
 use App\Models\Client;
 use Illuminate\Support\Facades\Route;
@@ -21,15 +22,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [pagesController::class, 'index']);
 
 // register form
-Route::get('/register', [ClientController::class, 'create']);
+Route::get('/register', [UsersController::class, 'create']);
 
 // store client data
-Route::post('/store', [ClientController::class, 'store']);
+Route::post('/store', [UsersController::class, 'store']);
 
 // login form
-Route::get('/login', [ClientController::class, 'login']);
+Route::get('/login', [UsersController::class, 'login']);
 // ->middleware('auth')
 
 // log in user
-Route::post('/users/authentification' , [ClientController::class , 'authentification']);
+Route::post('/users/authentification' , [UsersController::class , 'authentification']);
+
+// log out
+Route::get('/logout', [UsersController::class, 'logout']);
+
+// playlist page
+Route::get('/playlist', [pagesController::class, 'playlist']);
+
+// load create playlist form
+Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm']);
+
+// load create playlist form
+Route::post('/storeplaylist', [PlaylistsController::class, 'addPlaylist']);
 

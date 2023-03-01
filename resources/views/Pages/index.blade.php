@@ -1,7 +1,8 @@
 
 
 <x-layout>
-
+            {{-- load index with message after loggin --}}
+            <x-flash-message />
             {{-- body of body --}}
             <section class="px-6 py-4 h-full">
                 <div class="flex items-center h-fit mb-6">
