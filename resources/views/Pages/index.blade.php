@@ -1,6 +1,6 @@
 
 
-<x-layout>
+<x-layout :playlists="$playlists" >
             {{-- load index with message after loggin --}}
             <x-flash-message />
             {{-- body of body --}}

@@ -1,8 +1,7 @@
-<x-layout>
+<x-layout :playlists="$playlists">
     <div class="mx-auto bg-gradient-to-b from-gray-700 via-gray-900 to-black h-full p-12">
         <form action="/storeplaylist" method="POST" class="grid grid-cols-[auto_1fr] w-full  gap-8" enctype="multipart/form-data">
-            
-            
+
             @csrf
 
             <div class="flex items-center justify-center w-[300px] aspect-square" >

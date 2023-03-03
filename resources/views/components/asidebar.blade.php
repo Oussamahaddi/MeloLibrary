@@ -1,33 +1,33 @@
+
 <nav class=" relative">
-    <div class="col-span-1 row-span-3 bg-gray-900 pt-6 h-full fixed">
-        <div class="px-6 mb-6">
+    <div class="col-span-1 row-span-3 bg-gray-900 pt-4 h-full fixed">
+        <div class="px-6 mb-2">
             <div class="w-full flex justify-around items-center gap-4">
                 <img src="{{asset('images/logo.png')}}" alt="" class="w-12">
                 <h1 class="font-bold text-yellow-300 text-xl">MeloLibrary</h1>
             </div>
         </div>
-        <div class="px-2 mb-6 mt-12">
-            <ul>
+        <div class="px-2 mb-2 mt-4">
+            <ul class="text-gray-400">
                 <a href="/">
-                    <li class="bg-yellow-400 flex font-semibold items-center px-4 py-4 rounded text-sm text-black">
+                    <li class=" flex font-semibold items-center px-4 py-2 rounded text-sm hover:text-yellow-400">
                         Home
                     </li>
                 </a>
                 <a href="/playlist">
-                    <li class=" flex font-semibold items-center px-4 py-4 rounded text-sm text-white">
+                    <li class=" flex font-semibold items-center px-4 py-2 rounded text-sm hover:text-yellow-400">
                         PlayList
                     </li>
                 </a>
                 <a href="/albume">
-                    <li class=" flex font-semibold items-center px-4 py-4 rounded text-sm text-white">
+                    <li class=" flex font-semibold items-center px-4 py-2 rounded text-sm hover:text-yellow-400">
                         Albume
                     </li>
                 </a>
             </ul>
         </div>
         <div>
-            <h3 class="text-xs text-gray-100 uppercase text-white px-6 tracking-widest font-light mb-4"> Playlists
-            </h3>
+            <hr class="border-gray-200 mx-6 mb-3" />
             <div class="mb-3">
                 <div class="px-6 py-1 flex items-center text-sm text-white opacity-50 hover:opacity-100">
                     <a href="/createPlaylist" class="flex items-center">
@@ -47,6 +47,13 @@
                 </div>
             </div>
             <hr class="border-gray-200 mx-6 mb-3" />
+            <div class="px-6 mb-2 text-white h-40 overflow-y-scroll">
+                <ul class="flex flex-col gap-2 ">
+                    @foreach($playlists as $playlist)
+                        <a href="/{{$playlist->name}}/{{$playlist->id}}"><li>{{$playlist->name}}</li></a>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

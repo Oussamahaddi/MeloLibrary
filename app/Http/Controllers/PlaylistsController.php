@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlaylistsController extends Controller
 {
     public function playlistForm() {
-        return view('users.playlist');
+        $playlist = DB::table('playlists')->get();
+        return view('users.playlist' , [
+            'playlists' => $playlist
+        ]);
     }
     public function addPlaylist(Request $request) {
         // dd($request->file('image'));
         $formField = $request->validate([
             'name' => 'required',
-            'image' => ['required'],
         ]);
 
         if ($request->hasFile('image')) {
@@ -24,6 +27,6 @@ class PlaylistsController extends Controller
         // dd($formField);
         Playlist::create($formField);
 
-        return redirect('/')->with('message', 'playlist succesfully created ^^');
+        return redirect('/playlist')->with('message', 'playlist succesfully created ^^');
     }
 }

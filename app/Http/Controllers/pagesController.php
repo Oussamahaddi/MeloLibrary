@@ -10,7 +10,10 @@ class pagesController extends Controller
 {
     // load all pages
     public function index() {
-        return view('Pages.index', []);
+        $playlist = DB::table('playlists')->get();
+        return view('Pages.index', [
+            'playlists' => $playlist
+        ]);
     }
 
     public function playlist() {

@@ -1,4 +1,4 @@
-<footer class="bg-yellow-400 col-span-6 p-4 grid grid-cols-3 gap-6 fixed z-10 w-full bottom-0">
+<footer class="bg-yellow-400/20 col-span-6 p-4 grid grid-cols-3 gap-6 fixed z-10 w-full bottom-0">
     <div class="flex items-center">
         <div class="overflow-hidden rounded-xl mr-4">
             <img class="h-14 w-14 flex-shrink-0" src="{{asset('images/cover 1.jpg')}}" alt="" />

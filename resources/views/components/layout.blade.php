@@ -19,10 +19,10 @@
     <div class="grid grid-rows-3 grid-cols-6 h-screen">
 
         {{-- asidebar componenet --}}
-        <x-asidebar />
+        <x-asidebar :playlists="$playlists" />
         
         {{-- body --}}
-        <main class="col-span-5 row-span-3 bg-black ml-2">
+        <main class="col-span-5 row-span-3 bg-black ml-2 overflow-y-scroll">
             {{-- header of body --}}
             <header class="px-6 py-4 bg-gray-900/80 flex items-center justify-between sticky top-0 z-10 fixed">
                 {{-- include the search bar --}}
@@ -46,7 +46,6 @@
 
 
             {{$slot}}
-
 
         </main>
         
