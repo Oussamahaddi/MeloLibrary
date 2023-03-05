@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('playlists', function (Blueprint $table) {
             $table->id();
-            $table->integer('music_id');
-            // i was trying to add foreig key
-            $table->foreign('music_id')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('image')->nullable();
             $table->timestamps();

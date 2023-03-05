@@ -39,6 +39,15 @@
                     </a>
                 </div>
                 <div class="px-6 py-1 flex items-center text-sm text-white opacity-50 hover:opacity-100">
+                    <a href="/createMusic" class="flex items-center">
+                        <svg class="bg-white fill-current h-8 mr-4 p-1 text-black w-8" shape-rendering="crispEdges"
+                            viewBox="0 0 36 36">
+                            <path d="m28 20h-8v8h-4v-8h-8v-4h8v-8h4v8h8v4z"></path>
+                        </svg>
+                        Create Music
+                    </a>
+                </div>
+                <div class="px-6 py-1 flex items-center text-sm text-white opacity-50 hover:opacity-100">
                     <svg class="bg-liked-songs fill-current h-8 mr-4 p-2 w-8" viewBox="0 0 20 20">
                         <path
                             d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z" />

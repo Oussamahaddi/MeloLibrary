@@ -21,7 +21,7 @@ class PlaylistsController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $formField['image'] = $request->file('image')->store('upload', 'public');
+            $formField['image'] = $request->file('image')->store('upload/image', 'public');
         }
 
         // dd($formField);

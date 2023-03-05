@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MusicsController;
 use App\Http\Controllers\pagesController;
 use App\Http\Controllers\PlaylistsController;
 use App\Http\Controllers\UsersController;
@@ -23,14 +24,12 @@ Route::get('/', [pagesController::class, 'index']);
 
 // register form
 Route::get('/register', [UsersController::class, 'create']);
-
 // store client data
 Route::post('/store', [UsersController::class, 'store']);
 
 // login form
 Route::get('/login', [UsersController::class, 'login']);
 // ->middleware('auth')
-
 // log in user
 Route::post('/users/authentification' , [UsersController::class , 'authentification']);
 
@@ -42,7 +41,11 @@ Route::get('/playlist', [pagesController::class, 'playlist']);
 
 // load create playlist form
 Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm']);
-
 // load create playlist form
 Route::post('/storeplaylist', [PlaylistsController::class, 'addPlaylist']);
+
+// load create playlist form
+Route::get('/createMusic', [MusicsController::class, 'musicForm']);
+// load create playlist form
+Route::post('/storemusic', [MusicsController::class, 'addMusic']);
 

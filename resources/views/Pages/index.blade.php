@@ -7,7 +7,7 @@
             <section class="px-6 py-4 h-full">
                 <div class="flex items-center h-fit mb-6">
                     <div class="flex-1">
-                        <h3 class="text-2xl text-white">
+                        <h3 class="text-2xl text-white font-bold">
                             <a class="border-b border-transparent hover:border-white" href="">Recently played</a>
                         </h3>
                     </div>
@@ -18,6 +18,9 @@
 
                 {{-- covers  --}}
                 <x-cover />
+
+                {{-- music --}}
+                <x-music :musics="$musics" />
 
             </section>
 
