@@ -1,7 +1,7 @@
 
 
 <div class="text-white font-bold text-3xl mt-12 mb-6">
-    <h3>Music</h3>
+    <h3>My Music</h3>
 </div>
 
 
@@ -42,9 +42,9 @@
                     <td class="date px-6 font-semibold text-gray-900 dark:text-white">
                         {{$music->created_at}}
                     </td>
-                    <td class="px-6">
+                    <td class="duration px-6">
                         {{-- <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a> --}}
-                        ---
+                        
                     </td>
                     <td class="hidden">
                         <audio controls src="{{asset('storage/' . $music->music_audio)}}" class="audio"></audio>

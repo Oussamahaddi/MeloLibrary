@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('age');
             $table->rememberToken();
+            $table->tinyInteger('role')->default('0');
             $table->timestamps();
         });
     }

@@ -21,9 +21,10 @@ let currentSong = '';
 let indexOfSong = 0;
 
 music.forEach((ele, i) => {
-    ele.addEventListener('click', () => {
+    ///////
+    ele.addEventListener("click", () => {
         // remove bg from all element
-        music.forEach(ele => {
+        music.forEach((ele) => {
             ele.classList.remove("bg-gray-200/20");
         });
         // add bg to the selected element
@@ -33,8 +34,8 @@ music.forEach((ele, i) => {
         // current song index
         indexOfSong = i;
         // show footer bar
-        footer.classList.remove('hidden');
-        // replace footer with 
+        footer.classList.remove("hidden");
+        // replace footer with
         footerImg.src = ele.querySelector(".musicImg").src;
         footerTitle.textContent = ele.querySelector(".title").textContent;
         footerAlbum.textContent = ele.querySelector(".album").textContent;
@@ -47,7 +48,7 @@ music.forEach((ele, i) => {
         playBtn.classList.add("hidden");
         pauseBtn.classList.remove("hidden");
         console.log(indexOfSong);
-    })
+    });
 })
 
 // play music 

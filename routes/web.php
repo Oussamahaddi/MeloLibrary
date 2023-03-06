@@ -31,7 +31,8 @@ Route::post('/store', [UsersController::class, 'store']);
 Route::get('/login', [UsersController::class, 'login']);
 // ->middleware('auth')
 // log in user
-Route::post('/users/authentification' , [UsersController::class , 'authentification']);
+Route::post('/users/authentification' , [UsersController::class , 'authentification'])
+    ->middleware(['auth'])->
 
 // log out
 Route::get('/logout', [UsersController::class, 'logout']);

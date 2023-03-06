@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css'>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
     <link rel="stylesheet" href="./style.css">
     <script src="//unpkg.com/alpinejs" defer></script>
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/css/app.css']) --}}
@@ -20,7 +21,6 @@
 
         {{-- asidebar componenet --}}
         <x-asidebar :playlists="$playlists" />
-        
         {{-- body --}}
         <main class="col-span-5 row-span-3 bg-black ml-2 overflow-y-scroll">
             {{-- header of body --}}
@@ -31,11 +31,18 @@
                     @auth
                         <div  class="flex items-center gap-4">
                             <span class="text-yellow-400 font-bold">Welcome back {{auth()->user()->name}}</span>
-                            <img src="{{asset('images/avatar.jpg')}}" alt="" class="w-[30px] rounded-full hover:border-yellow-400 hover:border-2">
-                            <form action="/logout">
-                                @csrf
-                                <button class="text-black bg-yellow-400 font-semibold hover:bg-yellow-600 rounded-lg text-sm px-5 py-2">Log Out</button></a>
-                            </form>
+                            <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" src="{{asset('images/avatar.jpg')}}" alt="" class="cursor-pointer w-[30px] rounded-full hover:border-yellow-400 hover:border-2">
+                            <!-- Dropdown menu -->
+                            <div id="userDropdown" class="bg-gray-800 hidden z-10 w-44 text-white rounded border border-gray-300 divide-y divide-gray-100 shadow">
+                                <ul class="py-1 text-sm " aria-labelledby="avatarButton">
+                                    <li>
+                                        <a href="#" class="block py-2 px-4 hover:bg-gray-100 ">Dashboard</a>
+                                    </li>
+                                </ul>
+                                <div class="py-1">
+                                    <a href="/logout" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Logout</a>
+                                </div>
+                            </div>
                         </div>
                     @else
                         <a href="/login"><button type="button" class="text-black bg-yellow-400 font-semibold hover:bg-yellow-600 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Login</button></a>
@@ -56,6 +63,7 @@
     <!-- partial -->
 
 </body>
-    <script src="js/handleMusic.js"></script>
-    <script src="js/handleUpladFile.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+    <script src="js/handleMusic.js" defer></script>
+    <script src="js/handleUpladFile.js" defer></script>
 </html>
