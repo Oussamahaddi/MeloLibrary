@@ -2,14 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css'>
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
-    <link rel="stylesheet" href="./style.css">
-    <script src="//unpkg.com/alpinejs" defer></script>
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/css/app.css']) --}}
-    <title>MeloLibrary</title>
+    @include('partials._head')
 </head>
 
 <body>
@@ -33,14 +26,14 @@
                             <span class="text-yellow-400 font-bold">Welcome back {{auth()->user()->name}}</span>
                             <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" src="{{asset('images/avatar.jpg')}}" alt="" class="cursor-pointer w-[30px] rounded-full hover:border-yellow-400 hover:border-2">
                             <!-- Dropdown menu -->
-                            <div id="userDropdown" class="bg-gray-800 hidden z-10 w-44 text-white rounded border border-gray-300 divide-y divide-gray-100 shadow">
-                                <ul class="py-1 text-sm " aria-labelledby="avatarButton">
+                            <div id="userDropdown" class="bg-gray-800 hidden z-10 w-44 text-white rounded border border-gray-700 divide-y divide-gray-100 shadow">
+                                <ul class="py-1 text-sm " aria-labelledby="avatarButton">   
                                     <li>
-                                        <a href="#" class="block py-2 px-4 hover:bg-gray-100 ">Dashboard</a>
+                                        <a href="/admin/dashboard" class="block py-2 px-4 hover:bg-yellow-400 hover:text-black ">Dashboard</a>
                                     </li>
                                 </ul>
                                 <div class="py-1">
-                                    <a href="/logout" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Logout</a>
+                                    <a href="/logout" class="block py-2 px-4 text-sm hover:bg-gray-100 hover:bg-yellow-400 hover:text-black ">Logout</a>
                                 </div>
                             </div>
                         </div>

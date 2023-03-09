@@ -6,10 +6,13 @@ use Livewire\Component;
 
 class Counter extends Component
 {
-    public $main = 'test';
     public function render()
     {
         return view('livewire.counter');
+    }
+
+    public function state() {
+        return view('livewire.statistique');
     }
 
 }

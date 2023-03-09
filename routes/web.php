@@ -1,12 +1,15 @@
 <?php
 
+use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\pagesController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MusicsController;
-use App\Http\Controllers\pagesController;
 use App\Http\Controllers\PlaylistsController;
-use App\Http\Controllers\UsersController;
-use App\Models\Client;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardsController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +32,14 @@ Route::post('/store', [UsersController::class, 'store']);
 
 // login form
 Route::get('/login', [UsersController::class, 'login']);
-// ->middleware('auth')
+
+// handle the authentification if admin go to dashboard
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin/dashboard',[DashboardsController::class, 'index']);
+});
+
 // log in user
-Route::post('/users/authentification' , [UsersController::class , 'authentification'])
-    ->middleware(['auth'])->
+Route::post('/users/authentification' , [UsersController::class , 'authentification']);
 
 // log out
 Route::get('/logout', [UsersController::class, 'logout']);
@@ -50,3 +57,5 @@ Route::get('/createMusic', [MusicsController::class, 'musicForm']);
 // load create playlist form
 Route::post('/storemusic', [MusicsController::class, 'addMusic']);
 
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
