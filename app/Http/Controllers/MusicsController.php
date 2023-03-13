@@ -45,4 +45,11 @@ class MusicsController extends Controller
 
         return redirect('/admin/music')->with('message', 'Music succesfully created ^^');
     }
+
+    public function removeMusic($id) {
+        // dd($id);
+        $music = Music::find($id);
+        $music->delete();
+        return redirect('/admin/music')->with('message', 'Music deleted');
+    }
 }

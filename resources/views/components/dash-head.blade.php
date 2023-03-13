@@ -2,10 +2,12 @@
 
 <div class="fixed w-full max-sm:h-12 flex items-center justify-between text-white z-20 bg-gray-900">
     <div class="px-6 mb-2">
-        <div class="w-full flex justify-around items-center gap-4 p-2">
-            <img src="{{asset('images/logo.png')}}" alt="" class="w-12">
-            <h1 class="hidden md:block font-bold text-yellow-300 text-xl">MeloLibrary</h1>
-        </div>
+        <a href="/">
+            <div class="w-full flex justify-around items-center gap-4 p-2">
+                <img src="{{asset('images/logo.png')}}" alt="" class="w-12">
+                <h1 class="hidden md:block font-bold text-yellow-300 text-xl">MeloLibrary</h1>
+            </div>
+        </a>
     </div>
     <div class="flex items-center justify-around w-4/6 relative">
         <form action="" class="w-4/6 relative flex">

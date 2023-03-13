@@ -36,13 +36,19 @@ Route::get('/register', [UsersController::class, 'create']);
 Route::post('/store', [UsersController::class, 'store']);
 
 // login form
-Route::get('/login', [UsersController::class, 'login']);
+Route::get('/login', [UsersController::class, 'login'])->name('login');
 
 // handle the authentification if admin go to dashboard
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/dashboard',[DashboardsController::class, 'index']);
     Route::get('/admin/music', [DashboardsController::class, 'music']);
     Route::get('/admin/artist', [DashboardsController::class, 'artist']);
+    // create music form
+    Route::get('/admin/createMusic', [MusicsController::class, 'musicForm']);
+    // store music on database
+    Route::post('/admin/storemusic', [MusicsController::class, 'addMusic']);
+    // delete music with id
+    Route::get('/admin/deleteMusic/{id}',[MusicsController::class, 'removeMusic']);
 });
 
 // log in user
