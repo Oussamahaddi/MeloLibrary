@@ -1,6 +1,6 @@
-<x-layout :playlists="$playlists">
+<x-dash-layout >
     <div class="mx-auto bg-gradient-to-b from-gray-700 via-gray-900 to-black h-full p-12">
-        <form action="/storemusic" method="POST" class="grid grid-cols-[auto_1fr] w-full  gap-8" enctype="multipart/form-data">
+        <form action="/admin/storemusic" method="POST" class="grid grid-cols-[auto_1fr] w-full  gap-8" enctype="multipart/form-data">
 
             @csrf
 
@@ -57,4 +57,4 @@
         </form>
     </div>
 
-</x-layout>
+</x-dash-layout>

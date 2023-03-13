@@ -22,6 +22,11 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
+Route::get('', function () {
+    return view('test');
+});
+
+
 // home page that load recent play
 Route::get('/', [pagesController::class, 'index']);
 
@@ -36,6 +41,8 @@ Route::get('/login', [UsersController::class, 'login']);
 // handle the authentification if admin go to dashboard
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/dashboard',[DashboardsController::class, 'index']);
+    Route::get('/admin/music', [DashboardsController::class, 'music']);
+    Route::get('/admin/artist', [DashboardsController::class, 'artist']);
 });
 
 // log in user
@@ -53,9 +60,9 @@ Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm']);
 Route::post('/storeplaylist', [PlaylistsController::class, 'addPlaylist']);
 
 // load create playlist form
-Route::get('/createMusic', [MusicsController::class, 'musicForm']);
+Route::get('/admin/createMusic', [MusicsController::class, 'musicForm']);
 // load create playlist form
-Route::post('/storemusic', [MusicsController::class, 'addMusic']);
+Route::post('/admin/storemusic', [MusicsController::class, 'addMusic']);
 
+////////////////////////////////// dashboard ////////////////////////////////////////
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

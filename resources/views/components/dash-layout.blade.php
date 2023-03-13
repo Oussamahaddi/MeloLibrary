@@ -35,4 +35,5 @@
 
 </body>
     <script src="https://kit.fontawesome.com/e3e5f279fe.js" crossorigin="anonymous"></script>
+    <script src="{{asset('js/handleUpladFile.js')}}"></script>
 </html>

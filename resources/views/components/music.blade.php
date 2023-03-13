@@ -33,7 +33,7 @@
                         {{$music->id}}
                     </td>
                     <td class="flex gap-4 items-center font-bold text-white ">
-                        <img src="{{asset('storage/' . $music->music_image)}}" alt="{{$music->music_name}}" class="musicImg w-14">
+                        <img src="{{$music->music_image}}" alt="{{$music->music_name}}" class="musicImg w-14">
                         <a href="" class="title hover:underline">{{$music->music_name}}</a>
                     </td>
                     <td class="album px-6 font-semibold">
@@ -47,7 +47,7 @@
                         
                     </td>
                     <td class="hidden">
-                        <audio controls src="{{asset('storage/' . $music->music_audio)}}" class="audio"></audio>
+                        <audio controls src="{{$music->music_audio}}" class="audio"></audio>
                     </td>
                 </tr>
             @endforeach
