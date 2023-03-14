@@ -42,9 +42,8 @@
                     <td class="date px-6 font-semibold text-gray-900 dark:text-white">
                         {{$music->created_at}}
                     </td>
-                    <td class="duration px-6">
-                        {{-- <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a> --}}
-                        
+                    <td class="duration px-6 text-center">
+                        <i id="musicSetting" class="fa-solid fa-ellipsis text-xl cursor-pointer hover:text-white"></i>
                     </td>
                     <td class="hidden">
                         <audio controls src="{{$music->music_audio}}" class="audio"></audio>
