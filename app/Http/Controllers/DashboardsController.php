@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,8 @@ class DashboardsController extends Controller
         ]);
     }
     public function artist() {
-        return view('Dash.artist');
+        return view('Dash.artist', [
+            'artists' => Artist::all()
+        ]);
     }
 }

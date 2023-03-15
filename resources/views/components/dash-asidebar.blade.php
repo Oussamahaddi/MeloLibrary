@@ -1,7 +1,7 @@
 
 
 
-<div class="mt-12 flex flex-col top-14 left-0 hover:w-64 md:w-64 bg-gray-800 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+<div class="mt-12 mr-6 flex flex-col top-14 left-0 hover:w-64 md:w-64 bg-gray-800 h-full text-white transition-all duration-300 border-none z-10 sidebar">
     <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
             <li class="px-5">

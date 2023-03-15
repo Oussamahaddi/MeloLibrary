@@ -175,7 +175,3 @@ unmute.addEventListener('click', () => {
     volumInp.value = 100;
     footerMusic.volume = volumInp.value / 100;
 })
-
-
-//////////////// handle setting music /////////////
-

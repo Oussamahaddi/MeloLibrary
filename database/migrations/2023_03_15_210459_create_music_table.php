@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('music_audio');
             $table->string('music_name');
             $table->string('artist_group');
-            $table->date('date_sortie');
             $table->timestamps();
         });
     }

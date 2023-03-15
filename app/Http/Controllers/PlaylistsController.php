@@ -15,7 +15,7 @@ class PlaylistsController extends Controller
         ]);
     }
     public function addPlaylist(Request $request) {
-        // dd($request->file('image'));
+        
         $formField = $request->validate([
             'name' => 'required',
         ]);
@@ -24,7 +24,6 @@ class PlaylistsController extends Controller
             $formField['image'] = $request->file('image')->store('upload/image', 'public');
         }
 
-        // dd($formField);
         Playlist::create($formField);
 
         return redirect('/playlist')->with('message', 'playlist succesfully created ^^');

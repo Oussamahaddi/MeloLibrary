@@ -9,26 +9,24 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class MusicsController extends Controller
 {
+    // method that show form to add a music
     public function musicForm() {
-        $playlist = DB::table('playlists')->get();
         return view('Dash.admin.music');
     }
 
+    // method that store the music in db
     public function addMusic(Request $request) {
-        // dd($request->all());
+        // validate the formfield
         $formField = $request->validate([
             'music_name' => 'required',
             'music_image' => 'required',
             'music_audio' => 'required|mimes:mp3',
             'artist_group' => 'required',
         ]);
-
-        // dd($formField);
-
+        // store the audio and image into cloudinary
         $uploadAudio = Cloudinary::uploadFile($request->file('music_audio')->getRealPath(),[
             'folder' => 'Music'
         ])->getSecurePath();
-        // dd($uploadAudio);
         $uploadImage = Cloudinary::uploadFile($request->file('music_image')->getRealPath(),[
             'folder' => 'CoverMusic'
         ])->getSecurePath();
@@ -45,6 +43,10 @@ class MusicsController extends Controller
 
         return redirect('/admin/music')->with('message', 'Music succesfully created ^^');
     }
+
+    public function editMusic($id) {
+
+    } 
 
     public function removeMusic($id) {
         // dd($id);

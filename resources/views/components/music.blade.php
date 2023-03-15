@@ -1,7 +1,7 @@
 
 
 <div class="text-white font-bold text-3xl mt-12 mb-6">
-    <h3>My Music</h3>
+    <h3>Music</h3>
 </div>
 
 
@@ -34,7 +34,7 @@
                     </td>
                     <td class="flex gap-4 items-center font-bold text-white ">
                         <img src="{{$music->music_image}}" alt="{{$music->music_name}}" class="musicImg w-14">
-                        <a href="" class="title hover:underline">{{$music->music_name}}</a>
+                        <a href="/singleMusic/{{$music->id}}" class="title hover:underline">{{$music->music_name}}</a>
                     </td>
                     <td class="album px-6 font-semibold">
                         {{$music->artist_group}}

@@ -70,5 +70,7 @@ Route::get('/admin/createMusic', [MusicsController::class, 'musicForm']);
 // load create playlist form
 Route::post('/admin/storemusic', [MusicsController::class, 'addMusic']);
 
+Route::get('/singleMusic/{id}', [pagesController::class, 'singleMusic']);
+
 ////////////////////////////////// dashboard ////////////////////////////////////////
 

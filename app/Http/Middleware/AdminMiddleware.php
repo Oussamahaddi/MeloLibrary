@@ -26,7 +26,5 @@ class AdminMiddleware
         } else {
             return redirect('/login')->with('message', 'You need to login');
         }
-
-        
     }
 }

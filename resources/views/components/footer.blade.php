@@ -1,4 +1,4 @@
-<footer id="footer" class="hidden bg-yellow-400 col-span-6 p-4 grid grid-cols-3 gap-6 fixed z-10 w-full bottom-0">
+<footer id="footer" class="hidden bg-yellow-400 col-span-6 p-4 grid grid-cols-3 place-items-center gap-6 fixed z-10 w-full bottom-0">
     <audio controls id="footerMusic" preload="metadata" src="" hidden></audio>
     <div class="flex items-center">
         <div class="overflow-hidden rounded-xl mr-4">
@@ -66,7 +66,7 @@
     </div>
     <div class="flex flex-1 items-center space-x-1">
         <i class="fa-solid fa-volume-xmark cursor-pointer" id="mute"></i>
-        <input type="range" min="0" max="100" value="2.5" step="0.5" id="volumInp" class="w-full h-1 bg-gray-400 rounded-lg appearance-none cursor-pointer ">
+        <input type="range" min="0" max="100" value="2.5" step="0.5" id="volumInp" class=" h-1 bg-gray-400 rounded-lg appearance-none cursor-pointer ">
         <i class="fa-solid fa-volume-high cursor-pointer" id="unmute"></i>
     </div>
 </footer>
