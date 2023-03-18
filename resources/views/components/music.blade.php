@@ -27,10 +27,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($musics as $music)
+            @foreach ($musics as $key => $music)
                 <tr class="music bg-transparent hover:bg-gray-200/20 cursor-pointer">
                     <td class="px-6">
-                        {{$music->id}}
+                        {{$key + 1}}
                     </td>
                     <td class="flex gap-4 items-center font-bold text-white ">
                         <img src="{{$music->music_image}}" alt="{{$music->music_name}}" class="musicImg w-14">

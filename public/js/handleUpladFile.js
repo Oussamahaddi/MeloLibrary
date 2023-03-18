@@ -1,5 +1,6 @@
 
 
+ /// for add image
 
 let img = document.getElementById('img');
 let inp = document.getElementById('dropzone-file');

@@ -18,7 +18,7 @@
 
                 {{-- covers  --}}
                 <x-cover />
-
+                
                 {{-- music --}}
                 <x-music :musics="$musics" />
 

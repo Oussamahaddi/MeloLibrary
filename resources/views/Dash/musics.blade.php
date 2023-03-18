@@ -45,7 +45,7 @@
                                 {{$music->created_at}}
                             </td>
                             <td class="duration px-6 ">
-                                <a href="" class="mr-4 text-green-500 text-center">
+                                <a href="/admin/editMusic/{{$music->id}}" class="mr-4 text-green-500 text-center">
                                     <i class="fa-solid fa-pen"></i>
                                     Edit
                                 </a>

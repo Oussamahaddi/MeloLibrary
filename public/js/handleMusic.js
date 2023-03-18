@@ -60,7 +60,7 @@ music.forEach((ele, i) => {
 
         // play music on the footer bar
         footerMusic.play();
-        console.log(footerMusic.currentTime);
+        
         // give the footer current volume
         footerMusic.volume = volumInp.value / 100;
 
@@ -156,7 +156,7 @@ function handleFooter(img, title, album, audio) {
     footerMusic.play();
 }
 
-// handle the volum
+////////////// handle the volum
 volumInp.addEventListener('input', () => {
     mute.classList.remove("text-gray-500");
     if (volumInp.value <= 1) {
@@ -164,7 +164,6 @@ volumInp.addEventListener('input', () => {
     }
     footerMusic.volume = volumInp.value / 100;
 })
-
 mute.addEventListener('click', () => {
     mute.classList.add('text-gray-500');
     volumInp.value = 0;

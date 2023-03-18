@@ -36,6 +36,5 @@
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <script src="https://kit.fontawesome.com/e3e5f279fe.js" crossorigin="anonymous"></script>
-    <script src="../js/handleUpladFile.js"></script>
-    <script src="../js/delete.js"></script>
+    <script src="{{asset('../js/delete.js')}}"></script>
 </html>

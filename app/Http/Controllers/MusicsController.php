@@ -23,6 +23,7 @@ class MusicsController extends Controller
             'music_audio' => 'required|mimes:mp3',
             'artist_group' => 'required',
         ]);
+
         // store the audio and image into cloudinary
         $uploadAudio = Cloudinary::uploadFile($request->file('music_audio')->getRealPath(),[
             'folder' => 'Music'
@@ -44,9 +45,36 @@ class MusicsController extends Controller
         return redirect('/admin/music')->with('message', 'Music succesfully created ^^');
     }
 
-    public function editMusic($id) {
+    public function editMusicForm(Music $music) {
+        return view('Dash.admin.music-edit', [
+            'music' => $music
+        ]);
+    }
+    public function storeEditMusic(Request $request, Music $music) {
+        dd($request->all());
+        // validate the formfield
+        $formField = $request->validate([
+            'music_name' => 'required',
+            'music_image' => 'required',
+            'music_audio' => 'required|mimes:mp3',
+            'artist_group' => 'required',
+        ]);
+        dd($formField);
+        // store the audio and image into cloudinary
+        $uploadAudio = Cloudinary::uploadFile($request->file('music_audio')->getRealPath(),[
+            'folder' => 'Music'
+        ])->getSecurePath();
+        $uploadImage = Cloudinary::uploadFile($request->file('music_image')->getRealPath(),[
+            'folder' => 'CoverMusic'
+        ])->getSecurePath();
+        // $formField['music_image'] = $request->file('music_image')->store('upload/image', 'public');
+        // $formField['music_audio'] = $request->file('music_audio')->store('upload/music', 'public');
+        // dd($uploadAudio);
 
-    } 
+        $music->update($formField);
+
+        return back()->with('message', 'Music Updated ^^');
+    }
 
     public function removeMusic($id) {
         // dd($id);

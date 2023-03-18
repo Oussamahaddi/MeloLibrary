@@ -49,6 +49,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/admin/storemusic', [MusicsController::class, 'addMusic']);
     // delete music with id
     Route::get('/admin/deleteMusic/{id}',[MusicsController::class, 'removeMusic']);
+    // edit music with id
+    Route::get('/admin/editMusic/{music}',[MusicsController::class, 'editMusicForm']);
+    // store the update music with id
+    Route::put('/admin/storeEditMusic/{music}',[MusicsController::class, 'storeEditMusic']);
 });
 
 // log in user
