@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Band;
 use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,12 @@ class DashboardsController extends Controller
         $artists = DB::table('artists')->get();
         return view('Dash.artist', [
             'artists' => $artists
+        ]);
+    }
+    public function band() {
+        $bands = DB::table('bands')->get();
+        return view('Dash.band', [
+            'bands' => $bands
         ]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistsController;
+use App\Http\Controllers\BandsController;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/dashboard',[DashboardsController::class, 'index']);
     Route::get('/admin/music', [DashboardsController::class, 'music']);
     Route::get('/admin/artist', [DashboardsController::class, 'artist']);
+    Route::get('/admin/band', [DashboardsController::class, 'band']);
 
     /////////// Music \\\\\\\\\\\\\\\\
     // create music form
@@ -70,6 +72,17 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     // delete artist
     Route::get('/admin/deleteArtist/{artist}', [ArtistsController::class, 'deleteArtist']);
     
+    ///////////// Band \\\\\\\\\\\\\\\\\
+    // show band form
+    Route::get('/admin/createBandForm', [BandsController::class, 'createBandForm']);
+    // store the band info
+    Route::post('/admin/storeBand', [BandsController::class, 'storeBand']);
+    // edit the bend form
+    Route::get('/admin/editBandForm/{band}', [BandsController::class, 'editBandForm']);
+    // store edit artist
+    Route::put('/admin/storeEditBand/{band}', [BandsController::class, 'storeEditBand']);
+    // delete band
+    Route::get('/admin/deleteBand/{band}', [BandsController::class, 'deleteBand']);
 });
 
 // log in user
