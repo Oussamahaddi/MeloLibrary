@@ -5,7 +5,7 @@
     @include('partials._head')
 </head>
 
-<body>
+<body class="bg-gradient-to-r from-black to-gray-700">
 
     {{-- load this flash messge after register succes --}}
 
@@ -15,9 +15,9 @@
         {{-- asidebar componenet --}}
         <x-asidebar :playlists="$playlists" />
         {{-- body --}}
-        <main class="col-span-5 row-span-3 bg-black ml-2 overflow-y-scroll">
+        <main class="col-span-5 row-span-3 ml-2 overflow-y-scroll scrollbar-hide">
             {{-- header of body --}}
-            <header class="px-6 py-4 bg-gray-900/80 flex items-center justify-between sticky top-0 z-10 fixed">
+            <header class="px-6 py-4 flex items-center justify-between sticky top-0 z-10 fixed">
                 {{-- include the search bar --}}
                 @include('partials._search')
                 <div class="flex items-center">

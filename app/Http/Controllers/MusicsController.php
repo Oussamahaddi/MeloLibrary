@@ -51,35 +51,40 @@ class MusicsController extends Controller
         ]);
     }
     public function storeEditMusic(Request $request, Music $music) {
-        dd($request->all());
         // validate the formfield
         $formField = $request->validate([
             'music_name' => 'required',
-            'music_image' => 'required',
-            'music_audio' => 'required|mimes:mp3',
+            'music_image' => '',
+            'music_audio' => 'mimes:mp3',
             'artist_group' => 'required',
         ]);
-        dd($formField);
-        // store the audio and image into cloudinary
-        $uploadAudio = Cloudinary::uploadFile($request->file('music_audio')->getRealPath(),[
-            'folder' => 'Music'
-        ])->getSecurePath();
-        $uploadImage = Cloudinary::uploadFile($request->file('music_image')->getRealPath(),[
-            'folder' => 'CoverMusic'
-        ])->getSecurePath();
-        // $formField['music_image'] = $request->file('music_image')->store('upload/image', 'public');
-        // $formField['music_audio'] = $request->file('music_audio')->store('upload/music', 'public');
-        // dd($uploadAudio);
+
+        if ($request->hasFile('music_image')) {
+            $uploadImage = Cloudinary::uploadFile($request->file('music_image')->getRealPath(),[
+                'folder' => 'CoverMusic'
+            ])->getSecurePath();
+            $formField['music_image'] = $uploadImage;
+        } else {
+            $formField['music_image'] = $music->music_image;
+        }
+        if ($request->hasFile('music_audio')) {
+            $uploadAudio = Cloudinary::uploadFile($request->file('music_audio')->getRealPath(),[
+                'folder' => 'Music'
+            ])->getSecurePath();
+            $formField['music_audio'] = $uploadAudio;
+        } else {
+            $formField['music_audio'] = $music->music_audio;
+        }
 
         $music->update($formField);
 
-        return back()->with('message', 'Music Updated ^^');
+        return redirect('/admin/music')->with('message', 'Music Updated ^^');
     }
 
     public function removeMusic($id) {
         // dd($id);
         $music = Music::find($id);
         $music->delete();
-        return redirect('/admin/music')->with('message', 'Music deleted');
+        return back()->with('message', 'Music deleted');
     }
 }

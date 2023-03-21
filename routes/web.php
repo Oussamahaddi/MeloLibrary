@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistsController;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,9 +41,12 @@ Route::get('/login', [UsersController::class, 'login'])->name('login');
 
 // handle the authentification if admin go to dashboard
 Route::middleware(['auth', 'isAdmin'])->group(function () {
+    // pages of dashboard
     Route::get('/admin/dashboard',[DashboardsController::class, 'index']);
     Route::get('/admin/music', [DashboardsController::class, 'music']);
     Route::get('/admin/artist', [DashboardsController::class, 'artist']);
+
+    /////////// Music \\\\\\\\\\\\\\\\
     // create music form
     Route::get('/admin/createMusic', [MusicsController::class, 'musicForm']);
     // store music on database
@@ -53,6 +57,19 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/editMusic/{music}',[MusicsController::class, 'editMusicForm']);
     // store the update music with id
     Route::put('/admin/storeEditMusic/{music}',[MusicsController::class, 'storeEditMusic']);
+
+    /////////// Artist \\\\\\\\\\\\\\\\
+    // show artist from
+    Route::get('/admin/addArtist', [ArtistsController::class, 'artistForm']);
+    // store artist
+    Route::post('/admin/storeArtist', [ArtistsController::class, 'storeArtist']);
+    // edit artist
+    Route::get('/admin/editArtistForm/{artist}', [ArtistsController::class, 'editArtistForm']);
+    // store edit artist
+    Route::put('/admin/storeEditArtist/{artist}', [ArtistsController::class, 'storeEditArtist']);
+    // delete artist
+    Route::get('/admin/deleteArtist/{artist}', [ArtistsController::class, 'deleteArtist']);
+    
 });
 
 // log in user

@@ -1,6 +1,6 @@
 
 <nav class=" relative">
-    <div class="col-span-1 row-span-3 bg-gray-900 pt-4 h-full fixed">
+    <div class="col-span-1 row-span-3 pt-4 h-full fixed">
         <div class="px-6 mb-2">
             <div class="w-full flex justify-around items-center gap-4">
                 <img src="{{asset('images/logo.png')}}" alt="" class="w-12">
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <hr class="border-gray-200 mx-6 mb-3" />
-            <div class="px-6 mb-2 text-white h-40 overflow-y-scroll">
+            <div class="px-6 mb-2 text-white h-40 overflow-y-scroll scrollbar-hide">
                 <ul class="flex flex-col gap-2 ">
                     @foreach($playlists as $playlist)
                         <a href="/{{$playlist->name}}/{{$playlist->id}}"><li>{{$playlist->name}}</li></a>

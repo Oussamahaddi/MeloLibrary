@@ -12,14 +12,15 @@ class DashboardsController extends Controller
         return view('Dash.statistique');
     }
     public function music() {
-        $musics = DB::table('music')->get() ;
+        $musics = DB::table('music')->get();
         return view('Dash.musics', [
             'musics' => $musics
         ]);
     }
     public function artist() {
+        $artists = DB::table('artists')->get();
         return view('Dash.artist', [
-            'artists' => Artist::all()
+            'artists' => $artists
         ]);
     }
 }
