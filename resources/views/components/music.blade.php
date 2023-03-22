@@ -5,7 +5,7 @@
 </div>
 
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="relative shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-400 border-b border-gray-400">
             <tr>
@@ -29,6 +29,9 @@
         <tbody>
             @foreach ($musics as $key => $music)
                 <tr class="music bg-transparent hover:bg-gray-200/20 cursor-pointer">
+                    <td class="musicId hidden">
+                        {{$music->id}}
+                    </td>
                     <td class="px-6">
                         {{$key + 1}}
                     </td>
@@ -43,7 +46,7 @@
                         {{$music->created_at}}
                     </td>
                     <td class="duration px-6 text-center">
-                        <i id="musicSetting" class="fa-solid fa-ellipsis text-xl cursor-pointer hover:text-white"></i>
+                        <div id="avatarButton" class=" elipsis"><i class="fa-solid fa-ellipsis text-xl text-gray-400 cursor-pointer hover:text-white"></i></div>                            <!-- Dropdown menu -->
                     </td>
                     <td class="hidden">
                         <audio controls src="{{$music->music_audio}}" class="audio"></audio>
@@ -53,6 +56,7 @@
         </tbody>
     </table>
 </div>
+
 
 {{-- 
 <div class="grid grid-cols-4 gap-4">
@@ -68,6 +72,24 @@
     @endforeach
 </div> --}}
 
+            <div class="absolute hidden" id="menu">
+                <ul class="flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 ">
+                    <li class="text-center font-semibold block py-2 pl-3 pr-4 text-white bg-gray-700 rounded ">
+                        Add To Playlist
+                    </li>
+                    @foreach ($playlists as $playlist)
+                        <li>
+                            <a href="" id="{{$playlist->id}}" class="link block py-2 pl-3 pr-4 hover:bg-yellow-400  rounded">{{$playlist->name}}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
+
+            
+            
+
 <div class="h-64"></div>
 
-<script src="{{asset('js/handleDate.js')}}"></script>
+<script src="{{asset('js/handleDate.js')}}" defer></script>
+<script src="{{asset('js/handleRightClick.js')}}" defer></script>

@@ -11,6 +11,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MusicsController;
 use App\Http\Controllers\PlaylistsController;
 use App\Http\Controllers\DashboardsController;
+use App\Http\Controllers\PlaylistMusicsController;
+use App\Models\PlaylistMusic;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -29,17 +31,7 @@ Route::get('', function () {
 });
 
 
-// home page that load recent play
-Route::get('/', [pagesController::class, 'index']);
-
-// register form
-Route::get('/register', [UsersController::class, 'create']);
-// store client data
-Route::post('/store', [UsersController::class, 'store']);
-
-// login form
-Route::get('/login', [UsersController::class, 'login'])->name('login');
-
+////////////////// admin \\\\\\\\\\\\\\\\\\\\\\\
 // handle the authentification if admin go to dashboard
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     // pages of dashboard
@@ -85,26 +77,35 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/deleteBand/{band}', [BandsController::class, 'deleteBand']);
 });
 
+
+////////////////// user \\\\\\\\\\\\\\\\\\\\\\
+// home page that load recent play
+Route::get('/', [pagesController::class, 'index']);
+// register form
+Route::get('/register', [UsersController::class, 'create'])->middleware('guest');
+// store client data
+Route::post('/store', [UsersController::class, 'store']);
+// login form
+Route::get('/login', [UsersController::class, 'login'])->name('login')->middleware('guest');
 // log in user
 Route::post('/users/authentification' , [UsersController::class , 'authentification']);
-
 // log out
 Route::get('/logout', [UsersController::class, 'logout']);
 
+///// Playlist 
 // playlist page
-Route::get('/playlist', [pagesController::class, 'playlist']);
-
+Route::get('/playlist', [pagesController::class, 'playlist'])->middleware('auth');
 // load create playlist form
-Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm']);
+Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm'])->middleware('auth');
 // load create playlist form
 Route::post('/storeplaylist', [PlaylistsController::class, 'addPlaylist']);
+// load single playlist page that has musics
+Route::get('/playlist/{playlist}', [pagesController::class, 'signlePlaylist']);
+// delete playlist
+Route::get('/deletePlaylist/{playlist}', [PlaylistsController::class, 'deletePlaylist']);
 
-// load create playlist form
-Route::get('/admin/createMusic', [MusicsController::class, 'musicForm']);
-// load create playlist form
-Route::post('/admin/storemusic', [MusicsController::class, 'addMusic']);
 
-Route::get('/singleMusic/{id}', [pagesController::class, 'singleMusic']);
-
-////////////////////////////////// dashboard ////////////////////////////////////////
+////////// playlist music
+// add to playlist music 
+Route::get('/addToPlaylist/{playlist}/{music}', [PlaylistMusicsController::class, 'addToPlaylist']);
 

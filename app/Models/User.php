@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relationship to playlist mean that user has many playlist
+    public function playlist() {
+        return $this->hasMany(Playlist::class, 'user_id');
+    }
 }

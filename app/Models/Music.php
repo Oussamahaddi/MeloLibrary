@@ -11,4 +11,7 @@ class Music extends Model
     use HasFactory;
 
     // protected $table = 'music';
+    public function playlistMusic() {
+        return $this->hasMany(PlaylistMusic::class, 'music_id');
+    }
 }

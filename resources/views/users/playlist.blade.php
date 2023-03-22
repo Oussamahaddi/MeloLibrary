@@ -12,8 +12,10 @@
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                     </div>
-                    <input id="dropzone-file" type="file" name="image" class="hidden" />
-
+                    <input id="dropzone-file" type="file" name="image" value="{{old('image')}}" class="hidden" />
+                    {{-- @error('image')
+                        <span class="text-red-500 text-xs mt-1">{{$message}}</span>
+                    @enderror --}}
                 </label>
             </div>
             <div class="text-white flex flex-col justify-evenly h-full w-1/2">
@@ -21,7 +23,7 @@
                 <input type="text" name="name" placeholder="PlayList Name" class="py-2 px-4 rounded-xl bg-transparent border border-gray-400 outline-none">
 
                 {{-- load page if some field are wrong or error --}}
-                @error('image')
+                @error('name')
                     <span class="text-red-500 text-xs mt-1">{{$message}}</span>
                 @enderror
 
