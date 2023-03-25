@@ -14,4 +14,8 @@ class Music extends Model
     public function playlistMusic() {
         return $this->hasMany(PlaylistMusic::class, 'music_id');
     }
+
+    public function musicLike() {
+        return $this->hasMany(MusicLike::class, 'music_id');
+    }
 }

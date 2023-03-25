@@ -1,5 +1,5 @@
 <x-layout :playlists="$playlists">
-    <div class="mx-auto bg-gradient-to-b from-gray-700 via-gray-900 to-black h-full p-12">
+    <div class="mx-auto h-full p-12 ">
         <form action="/storeplaylist" method="POST" class="grid grid-cols-[auto_1fr] w-full  gap-8" enctype="multipart/form-data">
 
             @csrf
@@ -27,7 +27,7 @@
                     <span class="text-red-500 text-xs mt-1">{{$message}}</span>
                 @enderror
 
-                {{-- <p class="font-bold underline cursor-pointer">{{auth()->user()->name}}</p> --}}
+                <p class="font-bold underline cursor-pointer">{{auth()->user()->name}}</p>
 
                 <div class="flex justify-center">
                     <button class="text-black border-2 border-black bg-yellow-400 hover:bg-yellow-700 font-semibold rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Add PlayList</button>

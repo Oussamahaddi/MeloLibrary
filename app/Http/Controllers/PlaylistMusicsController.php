@@ -16,9 +16,17 @@ class PlaylistMusicsController extends Controller
             'music_id' => $music->id,
             'playlist_id' => $playlist->id
         ];
-        // dd($formField);
+        
         PlaylistMusic::create($formField);
 
         return redirect('/')->with('message', 'Music add to playlist succesfuly');
+    }
+
+    public function deletePlaylistMusic($id) {
+        // dd($playlistmusic);
+        // dd(DB::table('playlist_musics')->where('id_pm', '=' , $id));
+        $music = DB::table('playlist_musics')->where('id_pm', '=' , $id);
+        $music->delete();
+        return back()->with('message', 'Music deleted succesfuly');
     }
 }

@@ -73,21 +73,20 @@
 </div> --}}
 
             <div class="absolute hidden" id="menu">
-                <ul class="flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 ">
-                    <li class="text-center font-semibold block py-2 pl-3 pr-4 text-white bg-gray-700 rounded ">
+                <ul class="flex flex-col border border-gray-100 rounded bg-gray-50 ">
+                    <li class="text-center font-semibold block py-2 px-4 text-white bg-gray-700 rounded ">
                         Add To Playlist
                     </li>
-                    @foreach ($playlists as $playlist)
-                        <li>
-                            <a href="" id="{{$playlist->id}}" class="link block py-2 pl-3 pr-4 hover:bg-yellow-400  rounded">{{$playlist->name}}</a>
-                        </li>
-                    @endforeach
+                    @auth
+                        @foreach ($playlists as $playlist)
+                            <li>
+                                <a href="" id="{{$playlist->id}}" class="link block py-2 pl-3 pr-4 hover:bg-yellow-400  rounded">{{$playlist->name}}</a>
+                            </li>
+                        @endforeach
+                    @endauth
                 </ul>
             </div>
 
-
-            
-            
 
 <div class="h-64"></div>
 

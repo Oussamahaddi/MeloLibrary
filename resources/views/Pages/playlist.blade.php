@@ -20,7 +20,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <h2 class="text-white font-bold text-xl">{{$play->name}}</h2>
-                                <p class="text-gray-400">Created par session</p>
+                                <p class="text-gray-400">{{auth()->user()->name}}</p>
                             </div>
                             <div class="relative">
                                 <div id="avatarButton" class=" elipsis"><i class="fa-solid fa-ellipsis text-xl text-gray-400 cursor-pointer hover:text-white"></i></div>                            <!-- Dropdown menu -->

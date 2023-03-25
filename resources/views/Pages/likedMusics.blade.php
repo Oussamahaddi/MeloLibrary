@@ -1,42 +1,33 @@
 
-
 <x-layout :playlists="$playlists">
 
     {{-- load index with message after loggin --}}
     <x-flash-message />
 
-    <div class="w-full bg-gradient-to-b from-[#555] to-[#2a2a2a]">
+    <div class="w-full bg-gradient-to-b from-[#fc4889] via-[#fd5274] to-[#fd7865]">
 
         <div class="w-5/6 mx-auto flex gap-8 p-8 relative ">
             <div class="shadow-[0_0_35px] shadow-gray-900">
-                <img src="{{$playlist->image ? $playlist->image : asset('images/playlist bg.jpg')}}" alt="" class="w-64">
+                <img src="{{asset('images/likedsongs.jpg')}}" alt="" class="w-64">
             </div>
             <div class="flex flex-col justify-around text-white">
-                <p>Playlist</p>
-                <h3 class="font-bold text-7xl">{{$playlist->name}}</h3>
-                <p>{{$user->name}}. {{count($playlistMusics)}} titre</p>
-            </div>
-            {{-- edit and delete btn of playlist --}}
-            <div class="absolute top-6 right-4 flex flex-col items-center gap-4">
-                {{-- edit btn --}}
-                <a href="/editPlaylist/{{$playlist->id}}" title="Edit playlist"><i class="fa-solid fa-pen text-green-500"></i></a>
-                {{-- delete btn --}}
-                <button title="Delete playlist" id="deleteButton" data-modal-toggle="deleteModal" value="{{$playlist->id}}" class="w-fit deleteBtn" type="button">
-                    <i class="fa-solid fa-trash text-red-500"></i>
-                </button>
+                <p>Titre</p>
+                <h3 class="font-bold text-7xl">Songs Liked</h3>
+                <div class="flex gap-2 items-center">
+                    <p> {{auth()->user()->name}} . {{count($likedMusic)}} </p>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <div class="bg-gradient-to-b from-[#1f1f1f] to-[#171717]">
+    <div class="bg-gradient-to-b from-[#47201a] to-[#341713]">
 
-        <div class="w-5/6 mx-auto">
+        <div class="w-5/6 mx-auto p-8 flex items-center gap-8">
+            @if (count($likedMusic) > 0)
 
-            @if (count($playlistMusics) > 0)
-
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-400 border-b border-gray-400">
+                <table class="w-full text-sm text-left text-gray-500 border-b border-gray-600">
+                    <thead class="text-xs text-gray-400 border-b border-gray-600">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 #
@@ -56,7 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($playlistMusics as $key => $music)
+                        @foreach ($likedMusic as $key => $music)
                             <tr class="music bg-transparent hover:bg-gray-200/20 cursor-pointer">
                                 <td class="px-6">
                                     {{$key + 1}}
@@ -72,10 +63,10 @@
                                     {{$music->created_at}}
                                 </td>
                                 <td class="text-center">
-                                    <a href="/deleteMusic/{{$music->id_pm}}"><i class="fa-solid fa-trash text-red-400 hover:text-red-500"></i></a>
+                                    <a href="/unlikeMusic/{{$music->id}}/{{auth()->id()}}" title="Edit playlist"><i class="fa-solid fa-heart text-yellow-400 text-xl hover:text-yellow-700 cursor-pointer"></i></a>
                                 </td>
                                 <td class="hidden">
-                                    <audio controls src="{{asset('audio/desert.mp3')}}" class="audio"></audio>
+                                    <audio controls src="{{$music->music_audio}}" class="audio"></audio>
                                 </td>
                             </tr>
                         @endforeach
@@ -92,33 +83,25 @@
                     <div class="text-white flex items-center gap-8">
                         <img src="{{asset('images/noplaylist.png')}}" alt="" class="w-20">
                         <div class="flex flex-col gap-4 items-center">
-                            <h3 class="text-2xl font-bold">Create your first playlist now</h3>
-                            <a href="/"><button class="text-black bg-yellow-400 font-semibold hover:scale-110 rounded-full text-sm px-5 py-3 mr-2 mb-2 ">Add a Music</button></a>
+                            <h3 class="text-2xl font-bold">The Songs That You Want is here</h3>
+                            <a href="/"><button class="text-black bg-yellow-400 font-semibold hover:scale-110 rounded-full text-sm px-5 py-3 mr-2 mb-2 ">Like a Music</button></a>
                         </div>
                     </div>
                 </div>
 
             @endif
-
-            <div class="h-36"></div>
-
         </div>
+
+        <div class="h-36"></div>
     </div>
-        
+    
+
+
     <x-delete.delete />
 
 
     <script src="{{asset('js/handleDate.js')}}" defer></script>
-    <script>
-
-        let deleteBtn = document.querySelector(".deleteBtn");
-
-        deleteBtn.addEventListener("click", () => {
-            document
-                .getElementById("confirm-delete")
-                .setAttribute("href", `/deletePlaylist/${deleteBtn.value}`);
-        });
-
-    </script>
+    <script src="{{asset('js/singleMusic.js')}}" defer></script>
+    <script src="{{asset('js/handleMusic.js')}}" defer></script>
 
 </x-layout>

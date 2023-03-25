@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Music;
+use App\Models\MusicLike;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,12 +28,50 @@ class pagesController extends Controller
     }
 
     public function signlePlaylist(Playlist $playlist) {
-        $playlists = User::find(auth()->id())->playlist;
+        // $playlists = User::find(auth()->id())->playlist;
+        $playlistMusics = DB::table('playlist_musics')
+                            ->join('music', 'playlist_musics.music_id' , '=', 'music.id')
+                            ->where('playlist_musics.playlist_id', '=', $playlist->id)
+                            ->get();
+        // dd($playlistMusics);
+        // get 
         $user = $playlist->user;
+
         return view('Pages.singlePlaylist', [
-            'playlists' => $playlists,
+            'playlists' => auth()->user() ? auth()->user()->playlist()->get() : "",
             'playlist' => $playlist,
+            'playlistMusics' => $playlistMusics,
             'user' => $user
+        ]);
+    }
+
+    public function singleMusic(Music $music) {
+        $playlists = User::find(auth()->id());
+        // find the music that like by loged user return the first row
+        $userMusicLiked = User::find(auth()->id())->musicLike->where('music_id' , '=' , $music->id)->first();
+
+        // dd($userMusicLiked->where('music_id' , '=' , $music->id)->first());
+
+        return view('Pages.singleMusic', [
+            'playlists' => $playlists ? $playlists->playlist : "",
+            'music' => $music,
+            'like' => $userMusicLiked ? true : false
+        ]);
+    }
+
+    public function likedMusic() {
+
+        $playlists = User::find(auth()->id());
+        // get all music that get like by user loged
+        $likedMusic = DB::table('Music_likes')
+                        ->join('music', 'music_likes.music_id', '=' , 'music.id')
+                        ->where('music_likes.user_id', '=', auth()->id())
+                        ->get();
+        // dd($likedMusic);
+
+        return view('Pages.likedMusics', [
+            'likedMusic' => $likedMusic,
+            'playlists' => $playlists ? $playlists->playlist : "",
         ]);
     }
 }

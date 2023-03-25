@@ -11,9 +11,9 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class PlaylistsController extends Controller
 {
     public function playlistForm() {
-        $playlists = User::find(2)->playlist;;
+        // $playlists = User::find(auth()->user())->playlist;
         return view('users.playlist' , [
-            'playlists' => $playlists
+            'playlists' => auth()->user() ? auth()->user()->playlist()->get() : ""
         ]);
     }
     public function addPlaylist(Request $request) {
@@ -37,14 +37,30 @@ class PlaylistsController extends Controller
     }
 
     public function editPlaylistForm(Playlist $playlist) {
-        return view();
-    }
-
-    public function storeEditPlaylist(Request $request) {
-        $formField = $request->validate([
-            
+        // dd($playlist);
+        return view('users.playlist-edit', [
+            'playlists' => auth()->user() ? auth()->user()->playlist()->get() : "",
+            'playlist' => $playlist
         ]);
     }
+
+    public function storeEditPlaylist(Request $request, Playlist $playlist) {
+        $formField = $request->validate([
+            'image' => '',
+            'name' => '',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $uploadImage = Cloudinary::uploadFile($request->file('image')->getRealPath(),[
+                'folder' => 'Playlist image'
+            ])->getSecurePath();
+            $formField['image'] = $uploadImage;
+        }
+
+        $playlist->update($formField);
+        return redirect("/playlist/$playlist->id")->with('message', 'playlist updated succesfuly :)');
+    }
+
     public function deletePlaylist(Playlist $playlist) {
         $playlist->delete();
         return redirect('/playlist')->with('message', 'Playlist delete successfuly U_U');
