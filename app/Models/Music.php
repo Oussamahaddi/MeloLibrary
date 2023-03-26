@@ -18,4 +18,8 @@ class Music extends Model
     public function musicLike() {
         return $this->hasMany(MusicLike::class, 'music_id');
     }
+
+    public function comment() {
+        return $this->hasMany(Comment::class,'music_id');
+    }
 }

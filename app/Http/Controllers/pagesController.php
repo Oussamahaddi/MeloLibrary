@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Music;
 use App\Models\MusicLike;
 use App\Models\Playlist;
@@ -50,12 +51,16 @@ class pagesController extends Controller
         // find the music that like by loged user return the first row
         $userMusicLiked = User::find(auth()->id())->musicLike->where('music_id' , '=' , $music->id)->first();
 
+        // get all comment on specifique music
+        $comments = $music->comment;
+
         // dd($userMusicLiked->where('music_id' , '=' , $music->id)->first());
 
         return view('Pages.singleMusic', [
             'playlists' => $playlists ? $playlists->playlist : "",
             'music' => $music,
-            'like' => $userMusicLiked ? true : false
+            'like' => $userMusicLiked ? true : false,
+            'comments' => $comments
         ]);
     }
 

@@ -16,7 +16,8 @@ class BandsController extends Controller
 
     public function editBandForm(Band $band) {
         return view('Dash.admin.band-edit', [
-            'band' => $band
+            'band' => $band,
+            'band_members' => $band->bandMemebers()->get()
         ]);
     }
     public function storeBand(Request $request) {
@@ -51,7 +52,6 @@ class BandsController extends Controller
     public function storeEditBand(Request $request, Band $band) {
         $formField = $request->validate([
             'band_name' => 'required',
-            'band_members' => 'required',
             'band_image'=> '',
         ]);
         if ($request->hasFile('band_image')) {
@@ -61,6 +61,16 @@ class BandsController extends Controller
             $formField['band_image'] = $uploadImage;
         } else {
             $formField['band_image'] = $band->band_image;
+        }
+
+        foreach ($request->id as $key => $memeber_id) {
+            // print_r($memeber);
+            $data = [
+                'members_name' => $request->band_members[$key],
+                // 'band_id' => $bandId
+            ];
+            BandMembers::where('id' , $memeber_id)->update($data);
+            // $band->bandMemebers()->update($data);
         }
 
         $band->update($formField);

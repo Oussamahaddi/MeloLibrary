@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\BandsController;
+use App\Http\Controllers\CommentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pagesController;
 use App\Http\Controllers\UsersController;
@@ -122,3 +123,8 @@ Route::get('/singleMusic/{music}', [pagesController::class, 'singleMusic'])->mid
 Route::get('/likeMusic/{music}/{user}', [MusicLikesController::class, 'likeMusic'])->middleware('auth');
 // unlike music
 Route::get('/unlikeMusic/{music}/{user}', [MusicLikesController::class, 'unlikeMusic'])->middleware('auth');
+
+
+////////// comments \\\\\\\\\\\
+// store comment
+Route::post('/comment/{music}', [CommentsController::class, 'storeComment']);

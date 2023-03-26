@@ -18,7 +18,7 @@
                 <h3 class="font-bold text-7xl">{{$music->music_name}}</h3>
                 <div class="flex gap-2 items-center">
                     <img src="{{asset('images/avatar.jpg')}}" alt="" class="rounded-full w-[25px]">
-                    <p>Artist Name. {{$music->created_at}} Duration </p>
+                    <p class="">Artist Name. {{ \Illuminate\Support\Str::limit($music->created_at, 4, $end=' ') }} </p>
                 </div>
             </div>
         </div>
@@ -43,16 +43,72 @@
         </div>
 
         {{-- comments component --}}
-        <section class=" w-5/6 mx-auto hidden" id="commentForm">
+        <section class=" w-5/6 mx-auto" id="commentForm">
             <div class="mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg lg:text-2xl font-bold text-white">Comments</h2>
                 </div>
+
+                {{-- show all comments --}}
+                @foreach ($comments as $comment)
+                    <article class="p-6 mb-6 text-base bg-white rounded-lg">
+                        <footer class="flex justify-between items-center mb-2">
+                            {{-- avatar commente --}}
+                            <div class="flex items-center">
+                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
+                                    <img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Michael Gough">
+                                    {{$comment->user->name}}
+                                </p>
+                                <p class="date text-sm text-gray-600 dark:text-gray-400">{{$comment->created_at}}</p>
+                            </div>
+
+                            {{-- if user who is loget show him the setting btn on his comments --}}
+                            @if ($comment->user->id === auth()->id())
+                                {{-- setting btn that show drop down menu --}}
+                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100" type="button">
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
+                                        </path>
+                                    </svg>
+                                    <span class="sr-only">Comment settings</span>
+                                </button>
+                                <!-- Dropdown menu -->
+                                <div id="dropdownComment1"
+                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow">
+                                    <ul class="py-1 text-sm text-gray-700"
+                                        aria-labelledby="dropdownMenuIconHorizontalButton">
+                                        <li>
+                                            <a href="#"
+                                                class="block py-2 px-4 hover:bg-gray-100">Edit</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="block py-2 px-4 hover:bg-gray-100">Remove</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="block py-2 px-4 hover:bg-gray-100">Report</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+                        </footer>
+                        <p class="text-gray-500 ">
+                            {{$comment->commentaire}}
+                        </p>
+                    </article>
+                @endforeach
+
                 {{-- form that submit the comment --}}
-                <form class="mb-6" action="" method="POST">
+                <form class="mb-6" action="/comment/{{$music->id}}" method="POST">
+
+                    @csrf
+
                     <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
                         <label for="comment" class="sr-only">Your comment</label>
-                        <textarea id="comment" rows="2"
+                        <textarea id="comment" rows="2" name="commentaire"
                             class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none "
                             placeholder="Write a comment..."></textarea>
                     </div>
@@ -61,52 +117,6 @@
                         Post comment
                     </button>
                 </form>
-                <article class="p-6 mb-6 text-base bg-white rounded-lg">
-                    <footer class="flex justify-between items-center mb-2">
-                        {{-- avatar commente --}}
-                        <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-                                <img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Michael Gough">
-                                Michael Gough
-                            </p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Feb. 8, 2022</p>
-                        </div>
-                        {{-- setting btn that show drop down menu --}}
-                        <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100" type="button">
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
-                                </path>
-                            </svg>
-                            <span class="sr-only">Comment settings</span>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownComment1"
-                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow">
-                            <ul class="py-1 text-sm text-gray-700"
-                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100">Edit</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100">Remove</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 hover:bg-gray-100">Report</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </footer>
-                    <p class="text-gray-500 ">
-                        Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-                        instruments for the UX designers. The knowledge of the design tools are as important as the
-                        creation of the design strategy.
-                    </p>
-                </article>
             </div>
         </section>
 
@@ -116,7 +126,6 @@
 
 
     <x-delete.delete />
-
 
     <script src="{{asset('js/handleDate.js')}}" defer></script>
     <script src="{{asset('js/singleMusic.js')}}" defer></script>
