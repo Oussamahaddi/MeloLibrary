@@ -91,13 +91,13 @@ Route::get('/logout', [UsersController::class, 'logout']);
 
 ///// Playlist 
 // playlist page
-Route::get('/playlist', [pagesController::class, 'playlist'])->middleware('auth');
+Route::get('/playlist', [pagesController::class, 'playlist'])->middleware(['auth', 'auth:web']);
 // load create playlist form
-Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm'])->middleware('auth');
+Route::get('/createPlaylist', [PlaylistsController::class, 'playlistForm'])->middleware(['auth', 'auth:web']);
 // load create playlist form
-Route::post('/storeplaylist', [PlaylistsController::class, 'addPlaylist'])->middleware('auth');
+Route::post('/storeplaylist', [PlaylistsController::class, 'addPlaylist']);
 // load single playlist page that has musics
-Route::get('/playlist/{playlist}', [pagesController::class, 'signlePlaylist'])->middleware('auth');
+Route::get('/playlist/{playlist}', [pagesController::class, 'signlePlaylist'])->middleware(['auth', 'auth:web']);
 // edit playlist
 Route::get('/editPlaylist/{playlist}', [PlaylistsController::class, 'editPlaylistForm']);
 // store edit playlist
@@ -108,23 +108,27 @@ Route::get('/deletePlaylist/{playlist}', [PlaylistsController::class, 'deletePla
 
 ////////// playlist music
 // add to playlist music 
-Route::get('/addToPlaylist/{playlist}/{music}', [PlaylistMusicsController::class, 'addToPlaylist'])->middleware('auth');
+Route::get('/addToPlaylist/{playlist}/{music}', [PlaylistMusicsController::class, 'addToPlaylist'])->middleware(['auth', 'auth:web']);
 
 // delete music from playlist
-Route::get('/deleteMusic/{id}', [PlaylistMusicsController::class, 'deletePlaylistMusic'])->middleware('auth');
+Route::get('/deleteMusic/{id}', [PlaylistMusicsController::class, 'deletePlaylistMusic'])->middleware(['auth', 'auth:web']);
 
 
 ////////// music likes
 // load liked music page
-Route::get('/likedmusic', [pagesController::class, 'likedMusic'])->middleware('auth');
+Route::get('/likedmusic', [pagesController::class, 'likedMusic'])->middleware(['auth', 'auth:web']);
 // load single 
-Route::get('/singleMusic/{music}', [pagesController::class, 'singleMusic'])->middleware('auth');
+Route::get('/singleMusic/{music}', [pagesController::class, 'singleMusic'])->middleware(['auth', 'auth:web']);
 // like music
-Route::get('/likeMusic/{music}/{user}', [MusicLikesController::class, 'likeMusic'])->middleware('auth');
+Route::get('/likeMusic/{music}/{user}', [MusicLikesController::class, 'likeMusic'])->middleware(['auth', 'auth:web']);
 // unlike music
-Route::get('/unlikeMusic/{music}/{user}', [MusicLikesController::class, 'unlikeMusic'])->middleware('auth');
+Route::get('/unlikeMusic/{music}/{user}', [MusicLikesController::class, 'unlikeMusic'])->middleware(['auth', 'auth:web']);
 
 
 ////////// comments \\\\\\\\\\\
 // store comment
 Route::post('/comment/{music}', [CommentsController::class, 'storeComment']);
+
+
+/////////// user artist \\\\\\\\\\\
+Route::get('/artist', [pagesController::class, 'artist'])->middleware(['auth', 'auth:web']);

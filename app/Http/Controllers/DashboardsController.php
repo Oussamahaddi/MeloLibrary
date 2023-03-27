@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Band;
 use App\Models\Artist;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardsController extends Controller
 {
     public function index() {
-        return view('Dash.statistique');
+        $admins = User::all()->where('role', '1')->count();
+        $artists = Artist::all()->count();
+        $bands = Band::all()->count();
+        return view('Dash.statistique', compact('admins', 'artists', 'bands'));
     }
     public function music() {
         $musics = DB::table('music')->get();

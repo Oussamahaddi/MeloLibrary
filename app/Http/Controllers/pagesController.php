@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use App\Models\Comment;
 use App\Models\Music;
 use App\Models\MusicLike;
@@ -26,6 +27,12 @@ class pagesController extends Controller
         return view('Pages.playlist', [
             'playlists' => $playlists
         ]);
+    }
+
+    public function artist() {
+        $playlists = User::find(auth()->id())->playlist;
+        $artists = Artist::all();
+        return view('Pages.artist', compact('playlists', 'artists'));
     }
 
     public function signlePlaylist(Playlist $playlist) {

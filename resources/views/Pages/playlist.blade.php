@@ -3,7 +3,7 @@
 <x-layout :playlists="$playlists">
 
     {{-- body of body --}}
-    <section class="px-6 py-4 h-full">
+    <section class="px-6 py-4 h-full ">
 
         {{-- check if there is a playlist --}}
         @if (count($playlists) > 0)

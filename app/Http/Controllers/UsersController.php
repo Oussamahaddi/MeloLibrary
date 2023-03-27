@@ -43,7 +43,7 @@ class UsersController extends Controller
         ]);
         if (auth()->attempt($formField)) {
             $request->session()->regenerate();
-            return redirect('/')->with('message', 'Welcome back');
+            return redirect()->intended('/')->with('message', 'Welcome back');
         }
         return back()->withErrors(['email' => 'invalid email or password'])->onlyInput('email');
     }

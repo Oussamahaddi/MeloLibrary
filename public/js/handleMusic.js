@@ -34,6 +34,7 @@ let progressBar = document.getElementById("progressBar");
 let currentSong = '';
 let indexOfSong = 0;
 let currentDuration = 0;
+
 volumInp.value = 80;
 progressBar.value = 0;
 
